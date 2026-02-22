@@ -68,7 +68,7 @@ export default function Rodada() {
                   </div>
 
                   <video
-                    src="/information/rutaVideo.mp4"
+                    src="/information/rutaCortaVideo.mp4"
                     autoPlay
                     muted
                     loop
@@ -83,7 +83,7 @@ export default function Rodada() {
                   style={{ borderColor: "var(--color-secondary)" }}
                 >
                   <img
-                    src="/information/ruta.jpeg"
+                    src="/information/rutaCorta.jpeg"
                     alt="Mapa de la ruta"
                     className="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                   />

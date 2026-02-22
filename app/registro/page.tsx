@@ -26,7 +26,10 @@ export default function Registro() {
   const [tallaPrincipal, setTallaPrincipal] = useState("");
   const [integrantes, setIntegrantes] = useState<Integrante[]>([]);
   const [preview, setPreview] = useState<string | null>(null);
-  const [alerta, setAlerta] = useState<{ tipo: 'exito' | 'error' | 'advertencia'; mensaje: string } | null>(null);
+  const [alerta, setAlerta] = useState<{
+    tipo: "exito" | "error" | "advertencia";
+    mensaje: string;
+  } | null>(null);
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -67,7 +70,8 @@ export default function Registro() {
 
     // Validar campos principales
     if (!formData.nombre.trim()) camposFaltantes.push("Nombre completo");
-    if (!formData.procedencia.trim()) camposFaltantes.push("Lugar de procedencia");
+    if (!formData.procedencia.trim())
+      camposFaltantes.push("Lugar de procedencia");
     if (!formData.edad.trim()) camposFaltantes.push("Edad");
 
     // Validar talla si seleccionó jersey
@@ -90,7 +94,7 @@ export default function Registro() {
 
     return {
       valido: camposFaltantes.length === 0,
-      camposFaltantes
+      camposFaltantes,
     };
   };
 
@@ -121,7 +125,7 @@ export default function Registro() {
   const handleIntegranteChange = (
     index: number,
     field: keyof Integrante,
-    value: string
+    value: string,
   ) => {
     const nuevos = [...integrantes];
     nuevos[index][field] = value;
@@ -143,16 +147,16 @@ export default function Registro() {
     // Validar campos antes de enviar
     const validacion = validarCampos();
     if (!validacion.valido) {
-      const mensaje = `Campos requeridos faltantes:\n• ${validacion.camposFaltantes.join('\n• ')}`;
-      setAlerta({ tipo: 'advertencia', mensaje });
+      const mensaje = `Campos requeridos faltantes:\n• ${validacion.camposFaltantes.join("\n• ")}`;
+      setAlerta({ tipo: "advertencia", mensaje });
       return;
     }
 
     try {
       if (totalJerseys > 0 && !formData.recibo) {
-        setAlerta({ 
-          tipo: 'advertencia', 
-          mensaje: "Debe subir el comprobante de pago." 
+        setAlerta({
+          tipo: "advertencia",
+          mensaje: "Debe subir el comprobante de pago.",
         });
         return;
       }
@@ -169,9 +173,9 @@ export default function Registro() {
           .upload(fileName, file);
 
         if (uploadError) {
-          setAlerta({ 
-            tipo: 'error', 
-            mensaje: "Error subiendo comprobante" 
+          setAlerta({
+            tipo: "error",
+            mensaje: "Error subiendo comprobante",
           });
           return;
         }
@@ -203,9 +207,9 @@ export default function Registro() {
 
       if (registroError) {
         console.log("ERROR COMPLETO:", JSON.stringify(registroError, null, 2));
-        setAlerta({ 
-          tipo: 'error', 
-          mensaje: "Error guardando el registro" 
+        setAlerta({
+          tipo: "error",
+          mensaje: "Error guardando el registro",
         });
         return;
       }
@@ -225,20 +229,20 @@ export default function Registro() {
           .insert(integrantesData);
 
         if (error) {
-          setAlerta({ 
-            tipo: 'error', 
-            mensaje: "Error guardando integrantes" 
+          setAlerta({
+            tipo: "error",
+            mensaje: "Error guardando integrantes",
           });
           return;
         }
       }
 
       // ✅ Mostrar mensaje de éxito y limpiar datos
-      setAlerta({ 
-        tipo: 'exito', 
-        mensaje: "¡Registro guardado correctamente! 🎉" 
+      setAlerta({
+        tipo: "exito",
+        mensaje: "¡Registro guardado correctamente! 🎉",
       });
-      
+
       // 🔄 LIMPIAR TODOS LOS CAMPOS DESPUÉS DE ENVIAR
       setJersey("no");
       setTallaPrincipal("");
@@ -250,12 +254,11 @@ export default function Registro() {
         edad: "",
         recibo: null,
       });
-
     } catch (error) {
       console.error(error);
-      setAlerta({ 
-        tipo: 'error', 
-        mensaje: "Error inesperado" 
+      setAlerta({
+        tipo: "error",
+        mensaje: "Error inesperado",
       });
     }
   };
@@ -266,37 +269,71 @@ export default function Registro() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF0F5] to-[#FFE4EC] flex items-center justify-center p-6 relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF5FF] to-[#EDE9FE] flex items-center justify-center p-6 relative">
       {/* Alerta personalizada - SIN FONDO NEGRO */}
       {alerta && (
         <div className="fixed inset-0 flex items-center justify-center z-50 px-4 pointer-events-none">
           {/* Tarjeta de alerta - sin fondo oscuro */}
-          <div 
+          <div
             className={`bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full transform transition-all animate-fadeIn pointer-events-auto
-              ${alerta.tipo === 'exito' ? 'border-t-4 border-green-500' : 
-                alerta.tipo === 'error' ? 'border-t-4 border-red-500' : 
-                'border-t-4 border-yellow-500'}`}
+              ${
+                alerta.tipo === "exito"
+                  ? "border-t-4 border-green-500"
+                  : alerta.tipo === "error"
+                    ? "border-t-4 border-red-500"
+                    : "border-t-4 border-yellow-500"
+              }`}
           >
             {/* Icono */}
             <div className="flex justify-center mb-4">
-              {alerta.tipo === 'exito' && (
+              {alerta.tipo === "exito" && (
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  <svg
+                    className="w-12 h-12 text-green-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
                   </svg>
                 </div>
               )}
-              {alerta.tipo === 'error' && (
+              {alerta.tipo === "error" && (
                 <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center">
-                  <svg className="w-12 h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                  <svg
+                    className="w-12 h-12 text-red-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
                   </svg>
                 </div>
               )}
-              {alerta.tipo === 'advertencia' && (
+              {alerta.tipo === "advertencia" && (
                 <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center">
-                  <svg className="w-12 h-12 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  <svg
+                    className="w-12 h-12 text-yellow-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    ></path>
                   </svg>
                 </div>
               )}
@@ -304,16 +341,22 @@ export default function Registro() {
 
             {/* Mensaje */}
             <div className="text-center mb-6">
-              <p className="text-gray-800 text-lg whitespace-pre-line">{alerta.mensaje}</p>
+              <p className="text-gray-800 text-lg whitespace-pre-line">
+                {alerta.mensaje}
+              </p>
             </div>
 
             {/* Botón */}
             <button
               onClick={cerrarAlerta}
               className={`w-full py-3 rounded-lg font-semibold text-white transition-colors
-                ${alerta.tipo === 'exito' ? 'bg-green-500 hover:bg-green-600' : 
-                  alerta.tipo === 'error' ? 'bg-red-500 hover:bg-red-600' : 
-                  'bg-yellow-500 hover:bg-yellow-600'}`}
+                ${
+                  alerta.tipo === "exito"
+                    ? "bg-green-500 hover:bg-green-600"
+                    : alerta.tipo === "error"
+                      ? "bg-red-500 hover:bg-red-600"
+                      : "bg-yellow-500 hover:bg-yellow-600"
+                }`}
             >
               Aceptar
             </button>
@@ -322,8 +365,8 @@ export default function Registro() {
       )}
 
       <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-2xl">
-        <h1 className="text-3xl font-bold text-center text-[#9F1239] mb-6">
-          Registro al Evento 
+        <h1 className="text-3xl font-bold text-center text-[#6D28D9] mb-6">
+          Registro al Evento
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -334,7 +377,7 @@ export default function Registro() {
             required
             value={formData.nombre}
             onChange={handleChange}
-            className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+            className="w-full border border-purple-200 bg-white p-3 rounded-lg focus:ring-2 focus:ring-[#C084FC] focus:border-[#6D28D9] transition focus:border-transparent"
           />
 
           <input
@@ -344,7 +387,7 @@ export default function Registro() {
             required
             value={formData.procedencia}
             onChange={handleChange}
-            className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+            className="w-full border border-purple-200 bg-white p-3 rounded-lg focus:ring-2 focus:ring-[#C084FC] focus:border-[#6D28D9] transition focus:border-transparent"
           />
 
           <input
@@ -354,9 +397,9 @@ export default function Registro() {
             required
             value={formData.edad}
             onChange={handleChange}
-            className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+            className="w-full border border-purple-200 bg-white p-3 rounded-lg focus:ring-2 focus:ring-[#C084FC] focus:border-[#6D28D9] transition focus:border-transparent"
           />
-            
+
           <div className="w-full">
             <label className="block text-sm font-semibold mb-2 text-gray-700">
               ¿Desea jersey?
@@ -364,7 +407,7 @@ export default function Registro() {
             <select
               value={jersey}
               onChange={(e) => setJersey(e.target.value)}
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9F1239] transition"
+              className="w-full border border border-purple-200 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C084FC] focus:border-[#6D28D9] transition"
             >
               <option value="no">No</option>
               <option value="si">Sí</option>
@@ -376,7 +419,7 @@ export default function Registro() {
               value={tallaPrincipal}
               onChange={(e) => setTallaPrincipal(e.target.value)}
               required
-              className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+              className="w-full border border border-purple-200 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C084FC] focus:border-[#6D28D9] transition"
             >
               <option value="">Selecciona talla</option>
               {Object.keys(PRECIOS).map((t) => (
@@ -390,13 +433,16 @@ export default function Registro() {
           <button
             type="button"
             onClick={agregarIntegrante}
-            className="bg-[#9F1239] text-white px-4 py-2 rounded-lg hover:bg-[#7F0F2F] transition"
+            className="bg-[#6D28D9] text-white px-4 py-2 rounded-lg hover:bg-[#5B21B6] transition shadow-md"
           >
             + Agregar integrante
           </button>
 
           {integrantes.map((int, index) => (
-            <div key={index} className="bg-pink-50 p-4 rounded-lg space-y-3 border border-pink-200">
+            <div
+              key={index}
+              className=" p-4 rounded-lg space-y-3 bg-[#F5F3FF] border border-purple-200"
+            >
               <input
                 type="text"
                 placeholder="Nombre"
@@ -404,7 +450,7 @@ export default function Registro() {
                 onChange={(e) =>
                   handleIntegranteChange(index, "nombre", e.target.value)
                 }
-                className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+                className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#6D28D9] focus:border-transparent"
               />
 
               <input
@@ -414,9 +460,9 @@ export default function Registro() {
                 onChange={(e) =>
                   handleIntegranteChange(index, "edad", e.target.value)
                 }
-                className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+                className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#6D28D9] focus:border-transparent"
               />
-              
+
               <label className="block text-sm font-semibold mb-2 text-gray-700">
                 ¿También desea jersey?
               </label>
@@ -425,7 +471,7 @@ export default function Registro() {
                 onChange={(e) =>
                   handleIntegranteChange(index, "jersey", e.target.value)
                 }
-                className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+                className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#6D28D9] focus:border-transparent"
               >
                 <option value="no">No</option>
                 <option value="si">Sí</option>
@@ -437,7 +483,7 @@ export default function Registro() {
                   onChange={(e) =>
                     handleIntegranteChange(index, "talla", e.target.value)
                   }
-                  className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#9F1239] focus:border-transparent"
+                  className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-[#6D28D9] focus:border-transparent"
                 >
                   <option value="">Selecciona talla</option>
                   {Object.keys(PRECIOS).map((t) => (
@@ -451,7 +497,7 @@ export default function Registro() {
               <button
                 type="button"
                 onClick={() => eliminarIntegrante(index)}
-                className="bg-red-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-red-700 transition shadow-sm"
+                className="bg-[#5B21B6] text-white text-sm px-4 py-2 rounded-lg hover:bg-red-700 transition shadow-sm"
               >
                 Eliminar integrante
               </button>
@@ -478,19 +524,25 @@ export default function Registro() {
                 onChange={handleChange}
                 className="hidden"
               />
-              
+
               <button
                 type="button"
                 onClick={handleComprobanteClick}
-                className="w-full bg-blue-50 border-2 border-dashed border-blue-300 text-blue-700 py-3 rounded-lg font-semibold hover:bg-blue-100 transition-colors"
+                className="w-full bg-[#F5F3FF] border-2 border-dashed border-purple-300 text-[#6D28D9] py-3 rounded-lg font-semibold hover:bg-[#EDE9FE] transition-colors"
               >
                 📎 Colocar comprobante de pago (Solo imágenes y PDF)
               </button>
-              
+
               {preview && (
                 <div className="mt-2">
-                  <p className="text-sm text-green-600">✅ Comprobante seleccionado</p>
-                  <img src={preview} alt="Vista previa" className="mt-2 max-h-32 rounded-lg border" />
+                  <p className="text-sm text-green-600">
+                    ✅ Comprobante seleccionado
+                  </p>
+                  <img
+                    src={preview}
+                    alt="Vista previa"
+                    className="mt-2 max-h-32 rounded-lg border"
+                  />
                 </div>
               )}
               {formData.recibo && !preview && (
@@ -503,15 +555,15 @@ export default function Registro() {
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#9F1239] to-[#FFB6CD] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+            className="w-full bg-gradient-to-r from-[#6D28D9] to-[#C084FC] text-white py-3 rounded-lg font-semibold hover:scale-[1.02] hover:shadow-lg transition-all duration-300"
           >
-            Enviar Registro 
+            Enviar Registro
           </button>
 
           <Link href="/">
             <button
               type="button"
-              className="w-full border border-[#9F1239] text-[#9F1239] py-3 rounded-lg font-semibold hover:bg-pink-50 transition"
+              className="w-full border border-[#6D28D9] text-[#6D28D9] py-3 rounded-lg font-semibold hover:bg-[#EDE9FE] transition"
             >
               ← Regresar al Inicio
             </button>

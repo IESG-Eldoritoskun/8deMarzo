@@ -17,13 +17,14 @@ import {
 } from "lucide-react";
 
 export default function Home() {
-  type SectionKey = "sobre" | "patrocinadores";
+  type SectionKey = "sobre" | "patrocinadores" | "agradecimiento";
 
   const [visibleSections, setVisibleSections] = useState<
     Record<SectionKey, boolean>
   >({
     sobre: false,
     patrocinadores: false,
+    agradecimiento: false,
   });
 
   useEffect(() => {
@@ -31,9 +32,11 @@ export default function Home() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            const id = entry.target.id as SectionKey;
+
             setVisibleSections((prev) => ({
               ...prev,
-              [entry.target.id]: true,
+              [id]: true,
             }));
           }
         });
@@ -56,20 +59,20 @@ export default function Home() {
       <section className="min-h-screen flex items-center justify-center text-center px-4 relative overflow-hidden">
         {/* Fondos animados con CSS puro */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#FFB6CD]/20 rounded-full blur-3xl animate-pulseSlow"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#9F1239]/10 rounded-full blur-3xl animate-pulseSlow animation-delay-2000"></div>
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#EDE9FE]/20 rounded-full blur-3xl animate-pulseSlow"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#6D28D9]/10 rounded-full blur-3xl animate-pulseSlow animation-delay-2000"></div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#FCE7F3]/50 rounded-full blur-3xl animate-float"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto">
-          <div className="inline-block px-6 py-2 bg-[#9F1239]/10 rounded-full mb-8 animate-slideUp">
-            <span className="text-[#9F1239] font-semibold tracking-wide">
+          <div className="inline-block px-6 py-2 bg-[#6D28D9]/10 rounded-full mb-8 animate-slideUp">
+            <span className="text-[#6D28D9] font-semibold tracking-wide">
               8 DE MARZO 2026 · MARAVATÍO
             </span>
           </div>
 
           <h1 className="text-6xl md:text-8xl font-bold leading-tight animate-slideUp animation-delay-200">
-            <span className="bg-gradient-to-r from-[#9F1239] via-[#FFB6CD] to-[#0F172A] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#6D28D9] via-[#C084FC] to-[#0F172A] bg-clip-text text-transparent">
               Rodamos juntas,
             </span>
             <br />
@@ -84,7 +87,7 @@ export default function Home() {
           <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6 animate-slideUp animation-delay-600">
             <a
               href="/registro"
-              className="group px-10 py-4 bg-gradient-to-r from-[#9F1239] to-[#FFB6CD] text-white rounded-full shadow-2xl font-semibold text-lg hover:scale-105 hover:shadow-3xl transition-all duration-300"
+              className="group px-10 py-4 bg-gradient-to-r from-[#6D28D9] to-[#C084FC] text-white rounded-full shadow-2xl font-semibold text-lg hover:scale-105 hover:shadow-3xl transition-all duration-300"
             >
               Quiero asistir
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
@@ -94,7 +97,7 @@ export default function Home() {
 
             <a
               href="#sobre"
-              className="px-10 py-4 bg-white text-[#0F172A] rounded-full shadow-xl font-semibold text-lg border-2 border-[#FFB6CD] hover:border-[#9F1239] hover:scale-105 transition-all duration-300"
+              className="px-10 py-4 bg-white text-[#0F172A] rounded-full shadow-xl font-semibold text-lg border-2 border-[#C084FC] hover:border-[#6D28D9] hover:scale-105 transition-all duration-300"
             >
               Conocer más
             </a>
@@ -103,8 +106,8 @@ export default function Home() {
 
         {/* INDICADOR DE SCROLL - AHORA FUERA DEL CONTENEDOR PRINCIPAL */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fadeIn animation-delay-1000 z-20">
-          <div className="w-6 h-10 border-2 border-[#9F1239] rounded-full flex justify-center">
-            <div className="w-1.5 h-3 bg-[#9F1239] rounded-full mt-2 animate-scrollIndicator"></div>
+          <div className="w-6 h-10 border-2 border-[#6D28D9] rounded-full flex justify-center">
+            <div className="w-1.5 h-3 bg-[#6D28D9] rounded-full mt-2 animate-scrollIndicator"></div>
           </div>
         </div>
       </section>
@@ -118,18 +121,18 @@ export default function Home() {
             : "opacity-0 translate-y-20"
         }`}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FCE7F3]/50 to-transparent"></div>
-        <div className="absolute top-20 left-10 w-32 h-32 bg-[#FFB6CD]/20 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-[#9F1239]/10 rounded-full blur-2xl animate-float animation-delay-2000"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#EDE9FE]/50 to-transparent"></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-[#C084FC]/20 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-[#6D28D9]/10 rounded-full blur-2xl animate-float animation-delay-2000"></div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[#9F1239] to-[#FFB6CD] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#6D28D9] to-[#C084FC] bg-clip-text text-transparent">
                 Sobre el Evento
               </span>
             </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-[#9F1239] to-[#FFB6CD] mx-auto rounded-full"></div>
+            <div className="w-32 h-1 bg-gradient-to-r from-[#6D28D9] to-[#C084FC] mx-auto rounded-full"></div>
           </div>
 
           <p className="text-xl text-center max-w-4xl mx-auto leading-relaxed mb-16">
@@ -176,11 +179,11 @@ export default function Home() {
                     className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`}
                   ></div>
 
-                  <div className="mb-6 group-hover:scale-110 transition-transform duration-300 text-[#9F1239]">
+                  <div className="mb-6 group-hover:scale-110 transition-transform duration-300 text-[#6D28D9]">
                     <Icon size={48} strokeWidth={1.5} />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-[#9F1239] mb-4">
+                  <h3 className="text-2xl font-bold text-[#6D28D9] mb-4">
                     {item.title}
                   </h3>
 
@@ -190,7 +193,7 @@ export default function Home() {
                     <Sparkles
                       size={28}
                       strokeWidth={1.5}
-                      className="text-[#9F1239]"
+                      className="text-[#6D28D9]"
                     />
                   </div>
                 </div>
@@ -205,7 +208,7 @@ export default function Home() {
 
       {/* ================= JERSEY OFICIAL ================= */}
       <section className="py-32 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#9F1239] to-[#FFB6CD]"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#6D28D9] to-[#C084FC]"></div>
 
         {/* Elementos decorativos */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulseSlow"></div>
@@ -303,7 +306,7 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#9F1239] to-[#FFB6CD] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#6D28D9] to-[#C084FC] bg-clip-text text-transparent">
               Patrocinadores
             </span>
           </h2>
@@ -317,6 +320,59 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section
+        id="agradecimiento"
+        className={`py-32 px-4 relative overflow-hidden transition-all duration-1000 ${
+          visibleSections.agradecimiento
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-20"
+        }`}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-[#EDE9FE]/40 to-transparent"></div>
+
+        <div className="max-w-6xl mx-auto text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
+            <span className="bg-gradient-to-r from-[#6D28D9] to-[#C084FC] bg-clip-text text-transparent">
+              Gracias por Rodar con Nosotras
+            </span>
+          </h2>
+
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
+            A todas las ciclistas que han pedaleado en ediciones anteriores,
+            organizadoras, patrocinadoras, voluntarias y personas que apoyan y
+            comparten esta causa: gracias por ser parte de la historia de las
+            Rodadas 8M.
+          </p>
+
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-16">
+            Cada año construimos comunidad, visibilizamos la lucha y reafirmamos
+            nuestro compromiso con el respeto, la igualdad y la dignidad de
+            todas las mujeres.
+            <br />
+            Esta rodada es suya. Esta causa es de todas y todos.
+          </p>
+
+          {/* GALERÍA */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {["rodada1.jpg", "rodada2.jpg", "rodada3.jpg", "rodada4.jpg"].map(
+              (img, index) => (
+                <div
+                  key={index}
+                  className="relative overflow-hidden rounded-2xl shadow-lg group"
+                >
+                  <img
+                    src={`/rodadas/${img}`}
+                    alt={`Rodada 8M ${index + 1}`}
+                    className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition duration-500"></div>
+                </div>
+              ),
+            )}
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

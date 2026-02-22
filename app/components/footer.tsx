@@ -21,9 +21,9 @@ export default function Footer() {
   return (
     <footer className="bg-[#0F172A] text-white pt-20 pb-8 relative overflow-hidden">
       {/* Línea superior decorativa */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#9F1239] to-[#FFB6CD]"></div>
-      <div className="absolute top-20 right-20 w-32 h-32 bg-[#FFB6CD]/5 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-20 left-20 w-32 h-32 bg-[#9F1239]/5 rounded-full blur-2xl"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#6D28D9] to-[#C084FC]"></div>
+      <div className="absolute top-20 right-20 w-32 h-32 bg-[#C084FC]/5 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-20 left-20 w-32 h-32 bg-[#6D28D9]/5 rounded-full blur-2xl"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* GRID PRINCIPAL */}
@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="space-y-4">
             <Link
               href="/"
-              className="text-3xl font-bold bg-gradient-to-r from-[#FFB6CD] to-[#9F1239] bg-clip-text text-transparent"
+              className="text-3xl font-bold bg-gradient-to-r from-[#C084FC] to-[#6D28D9] bg-clip-text text-transparent"
             >
               Evento Mujer
             </Link>
@@ -53,7 +53,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#FFB6CD] hover:text-[#0F172A] hover:scale-110 transition-all duration-300"
+                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#C084FC] hover:text-[#0F172A] hover:scale-110 transition-all duration-300"
                   >
                     <Icon size={18} strokeWidth={1.8} />
                   </a>
@@ -64,7 +64,7 @@ export default function Footer() {
 
           {/* Columna 2 */}
           <div>
-            <h3 className="text-lg font-semibold text-[#FFB6CD] mb-4">
+            <h3 className="text-lg font-semibold text-[#C084FC] mb-4">
               Enlaces rápidos
             </h3>
             <ul className="space-y-3">
@@ -78,9 +78,9 @@ export default function Footer() {
                 <li key={i}>
                   <Link
                     href={item.href}
-                    className="text-gray-300 hover:text-[#FFB6CD] transition-colors duration-300 flex items-center group"
+                    className="text-gray-300 hover:text-[#C084FC] transition-colors duration-300 flex items-center group"
                   >
-                    <span className="mr-2 text-[#FFB6CD] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="mr-2 text-[#C084FC] opacity-0 group-hover:opacity-100 transition-opacity">
                       →
                     </span>
                     {item.label}
@@ -92,13 +92,13 @@ export default function Footer() {
 
           {/* Columna 3 */}
           <div>
-            <h3 className="text-lg font-semibold text-[#FFB6CD] mb-4">
+            <h3 className="text-lg font-semibold text-[#C084FC] mb-4">
               Contacto
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <MapPin
-                  className="text-[#FFB6CD] mt-1"
+                  className="text-[#C084FC] mt-1"
                   size={18}
                   strokeWidth={1.8}
                 />
@@ -110,27 +110,27 @@ export default function Footer() {
               </li>
 
               <li className="flex items-center space-x-3">
-                <Mail className="text-[#FFB6CD]" size={18} strokeWidth={1.8} />
+                <Mail className="text-[#C084FC]" size={18} strokeWidth={1.8} />
                 <a
                   href="mailto:info@eventomujer.com"
-                  className="text-gray-300 hover:text-[#FFB6CD] transition text-sm"
+                  className="text-gray-300 hover:text-[#C084FC] transition text-sm"
                 >
-                  info@eventomujer.com
+                   mujeresenbici2026@gmail.com 
                 </a>
               </li>
 
               <li className="flex items-center space-x-3">
-                <Phone className="text-[#FFB6CD]" size={18} strokeWidth={1.8} />
+                <Phone className="text-[#C084FC]" size={18} strokeWidth={1.8} />
                 <a
                   href="tel:+524471234567"
-                  className="text-gray-300 hover:text-[#FFB6CD] transition text-sm"
+                  className="text-gray-300 hover:text-[#C084FC] transition text-sm"
                 >
-                  +52 447 123 4567
+                  +52 447 103 2406
                 </a>
               </li>
 
               <li className="flex items-center space-x-3">
-                <Clock className="text-[#FFB6CD]" size={18} strokeWidth={1.8} />
+                <Clock className="text-[#C084FC]" size={18} strokeWidth={1.8} />
                 <span className="text-gray-300 text-sm">
                   7:30 AM - Domingo 8 de marzo
                 </span>
@@ -140,7 +140,7 @@ export default function Footer() {
           </div>
           {/* Columna 4 - Acceso */}
           <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-[#FFB6CD] mb-4">
+          <h3 className="text-lg font-semibold text-[#C084FC] mb-4">
             Acceso
           </h3>
 
@@ -148,7 +148,7 @@ export default function Footer() {
             {/* Botón Registro */}
           <Link
             href="/registro"
-            className="bg-gradient-to-r from-[#9F1239] to-[#FFB6CD] text-white px-6 py-3 rounded-full font-semibold text-center shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+            className="bg-gradient-to-r from-[#6D28D9] to-[#C084FC] text-white px-6 py-3 rounded-full font-semibold text-center shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
             Registrarme
           </Link>
@@ -156,7 +156,7 @@ export default function Footer() {
     {/* Botón Admin */}
     <Link
       href="/login"
-      className="border border-[#FFB6CD] text-[#FFB6CD] px-6 py-3 rounded-full font-semibold text-center hover:bg-[#FFB6CD] hover:text-[#0F172A] transition-all duration-300 flex items-center justify-center space-x-2"
+      className="border border-[#C084FC] text-[#C084FC] px-6 py-3 rounded-full font-semibold text-center hover:bg-[#C084FC] hover:text-[#0F172A] transition-all duration-300 flex items-center justify-center space-x-2"
     >
       <span>Iniciar sesión Admin</span>
     </Link>
@@ -184,10 +184,10 @@ export default function Footer() {
           </p>
 
           <div className="flex space-x-6">
-            <Link href="#" className="hover:text-[#FFB6CD] transition">
+            <Link href="#" className="hover:text-[#C084FC] transition">
               Aviso de privacidad
             </Link>
-            <Link href="#" className="hover:text-[#FFB6CD] transition">
+            <Link href="#" className="hover:text-[#C084FC] transition">
               Términos y condiciones
             </Link>
           </div>

@@ -2,11 +2,11 @@
 
 /* 🎨 Paleta Evento Mujer */
 @theme {
-  --color-primary: #9F1239;
-  --color-secondary: #FCE7F3;
-  --color-accent: #FFB6CD;
-  --color-background: #FFFBF5;
-  --color-textDark: #0F172A;
+  --color-primary: #6D28D9;      /* Morado fuerte */
+--color-secondary: #EDE9FE;    /* Lavanda muy claro */
+--color-accent: #C084FC;       /* Morado brillante */
+--color-background: #FAF5FF;   /* Fondo ligeramente lila */
+--color-textDark: #1E1B4B;     /* Azul-morado oscuro */
 }
 
 body {

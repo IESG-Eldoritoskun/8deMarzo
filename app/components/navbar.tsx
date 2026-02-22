@@ -36,10 +36,10 @@ export default function Navbar() {
           <Link
             key={item.label}
             href={item.href}
-            className="font-medium hover:text-[#9F1239] transition-colors relative group"
+            className="font-medium hover:text-[#6D28D9] transition-colors relative group"
           >
             {item.label}
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#9F1239] group-hover:w-full transition-all duration-300"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#6D28D9] group-hover:w-full transition-all duration-300"></span>
           </Link>
         ))}
       </div>
@@ -49,7 +49,7 @@ export default function Navbar() {
         {/* Botón Registro - visible en todos los dispositivos */}
         <Link
           href="/registro"
-          className="bg-gradient-to-r from-[#9F1239] to-[#FFB6CD] text-white px-4 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 whitespace-nowrap"
+          className="bg-gradient-to-r from-[#6D28D9] to-[#C084FC] text-white px-4 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 whitespace-nowrap"
         >
           Registrarme
         </Link>
@@ -73,7 +73,7 @@ export default function Navbar() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="font-medium py-2 hover:text-[#9F1239] transition-colors border-b border-gray-100 last:border-0"
+                className="font-medium py-2 hover:text-[#6D28D9] transition-colors border-b border-gray-100 last:border-0"
               >
                 {item.label}
               </Link>

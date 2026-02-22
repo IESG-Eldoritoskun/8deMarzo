@@ -9,7 +9,7 @@ const sponsors = [
   { name: "Caja Pupular Marabatío", logo: "/sponsors/cajaMara.jpeg" },
   { name: "Cecyte", logo: "/sponsors/cecyte.jpeg" },
   { name: "El Profe", logo: "/sponsors/elProfe.png" },
-  { name: "Muebles Vega", logo: "/sponsors/MueblesVega.png" },
+  { name: "Muebles Vega", logo: "/sponsors/mueblesVega.png" },
   { name: "AgroJet", logo: "/sponsors/Agrojet.png" },
   { name: "Municipip de Maravatío", logo: "/sponsors/Maravatio.jpg" },
   { name: "Dental Color", logo: "/sponsors/DentalColor.jpeg" },

@@ -34,7 +34,7 @@ export default function Footer() {
               href="/"
               className="text-3xl font-bold bg-gradient-to-r from-[#C084FC] to-[#6D28D9] bg-clip-text text-transparent"
             >
-              Evento Mujer
+              Rodada Gratuita 8M
             </Link>
 
             <p className="text-gray-300 text-sm leading-relaxed">

@@ -14,6 +14,8 @@ import {
   Ruler,
   DollarSign,
   ShoppingBag,
+  MessageCircle,
+  Facebook,
 } from "lucide-react";
 
 export default function Home() {
@@ -284,11 +286,40 @@ export default function Home() {
                   ¿Cómo puedes obtenerla?
                 </h3>
 
-                <p className="mt-6 text-sm opacity-80 leading-relaxed">
+                <p className="mt-6 text-sm opacity-90 leading-relaxed">
                   Cómprala el día del evento. Habrá un stand exclusivo para la
-                  venta de jerseys y el pago será en efectivo. ¡No te quedes sin
+                  venta de jerseys y el pago será en efectivo. También puedes
+                  enviarnos un mensaje directo para apartarla. ¡No te quedes sin
                   la tuya!
                 </p>
+
+                {/* Botones de contacto */}
+                <div className="mt-6 flex flex-wrap gap-4">
+                  <a
+                    href="https://www.facebook.com/share/1JJBstL9vw/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white text-[#6D28D9] 
+               px-5 py-2 rounded-full font-semibold 
+               hover:bg-[#EDE9FE] transition-all duration-300 
+               shadow-md hover:shadow-lg hover:scale-105"
+                  >
+                    <Facebook size={18} />
+                    Facebook
+                  </a>
+
+                  <a
+                    href="https://wa.me/524471032406"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white/20 border border-white/40 
+               px-5 py-2 rounded-full font-semibold 
+               hover:bg-white/30 transition-all duration-300"
+                  >
+                    <MessageCircle size={18} />
+                    WhatsApp
+                  </a>
+                </div>
               </div>
             </div>
           </div>

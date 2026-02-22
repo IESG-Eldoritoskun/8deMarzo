@@ -10,6 +10,9 @@ const sponsors = [
   { name: "Cecyte", logo: "/sponsors/cecyte.jpeg" },
   { name: "El Profe", logo: "/sponsors/elProfe.png" },
   { name: "Muebles Vega", logo: "/sponsors/MueblesVega.png" },
+  { name: "AgroJet", logo: "/sponsors/Agrojet.png" },
+  { name: "Municipip de Maravatío", logo: "/sponsors/Maravatio.jpg" },
+  { name: "Dental Color", logo: "/sponsors/DentalColor.jpeg" },
 ];
 
 export default function SponsorsCarousel() {

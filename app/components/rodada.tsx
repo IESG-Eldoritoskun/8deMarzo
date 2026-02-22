@@ -1,5 +1,6 @@
 "use client";
 
+import { MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Rodada() {
@@ -27,7 +28,7 @@ export default function Rodada() {
           <div className="text-center mb-16">
             <h2
               className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: "var(--color-textDark)" }}
+              style={{ color: "var(--color-primary)" }}
             >
               La Rodada
             </h2>
@@ -93,14 +94,13 @@ export default function Rodada() {
             <div className="grid sm:grid-cols-2 gap-12">
               {[
                 { title: "Distancia", value: "20 km" },
-                { title: "Dificultad", value: "Intermedia" },
+                
                 { title: "Hora de reunión", value: "7:30 AM" },
                 { title: "Hora de salida", value: "8:00 AM" },
                 {
                   title: "Punto de salida",
                   value: "Canchas del Chirimoyo",
-                   url:
-                    "https://www.google.com/maps/dir/?api=1&destination=Cancha+del+Chirimoyo",
+                  url: "https://www.google.com/maps/dir/?api=1&destination=Cancha+del+Chirimoyo",
                 },
               ].map((item, i) => (
                 <div
@@ -191,14 +191,12 @@ export default function Rodada() {
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { title: "Distancia", value: "30 km" },
-                { title: "Dificultad", value: "Intermedia" },
                 { title: "Hora de reuión", value: "7:30 AM" },
                 { title: "Hora de salida", value: "8:00 AM" },
                 {
                   title: "Punto de salida",
                   value: "Cancha del Chirimoyo",
-                  url:
-                    "https://www.google.com/maps/dir/?api=1&destination=Cancha+del+Chirimoyo",
+                  url: "https://www.google.com/maps/dir/?api=1&destination=Cancha+del+Chirimoyo",
                 },
               ].map((item, i) => (
                 <div
@@ -232,6 +230,92 @@ export default function Rodada() {
                       Ir al punto de salida
                     </a>
                   )}
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* ================= PUNTOS DE ABASTECIMIENTO ================= */}
+          <div className="mt-32">
+            <div className="text-center mb-16">
+              <h3
+                className="text-3xl md:text-4xl font-bold mb-4"
+                style={{ color: "var(--color-primary)" }}
+              >
+                Puntos de Abastecimiento
+              </h3>
+              <p
+                className="max-w-2xl mx-auto"
+                style={{ color: "var(--color-textDark)", opacity: 0.8 }}
+              >
+                Durante la rodada contaremos con tres estaciones estratégicas
+                para hidratación y apoyo. Tu bienestar es prioridad.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Abastecimiento 1",
+                  desc: "Ejido Pozo de Tres Piedras Laguna Seca, Michoacán",
+                  url: "https://maps.app.goo.gl/kUjDnvZ962FJ4Z928",
+                },
+                {
+                  title: "Abastecimiento 2",
+                  desc: "Saucillo Segundo, Gto",
+                  url: "https://maps.app.goo.gl/VtHeGTQ9XJwDnoUz9",
+                },
+                {
+                  title: "Abastecimiento 3",
+                  desc: "Ejido Pozo de Tres Piedras Laguna Seca, Michoacán",
+                  url: "https://maps.app.goo.gl/b9gmZ5Y33MT2S5hh9",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                  style={{
+                    backgroundColor: "white",
+                    border: "1px solid var(--color-secondary)",
+                  }}
+                >
+                  {/* Número */}
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-lg"
+                    style={{
+                      background:
+                        "linear-gradient(to right, var(--color-primary), var(--color-accent))",
+                    }}
+                  >
+                    {i + 1}
+                  </div>
+
+                  {/* Título */}
+                  <h4
+                    className="text-xl font-semibold mb-3"
+                    style={{ color: "var(--color-primary)" }}
+                  >
+                    {item.title}
+                  </h4>
+
+                  {/* Descripción */}
+                  <p
+                    className="mb-6"
+                    style={{ color: "var(--color-textDark)", opacity: 0.8 }}
+                  >
+                    {item.desc}
+                  </p>
+
+                  {/* Botón ubicación */}
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white transition hover:opacity-90"
+                    style={{ backgroundColor: "var(--color-primary)" }}
+                  >
+                    <MapPin size={18} />
+                    Ver ubicación
+                  </a>
                 </div>
               ))}
             </div>

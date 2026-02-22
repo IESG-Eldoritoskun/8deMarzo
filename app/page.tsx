@@ -5,10 +5,26 @@ import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 import Rodada from "@/app/components/rodada";
 import SponsorsCarousel from "@/app/components/SponsorsCarousel";
-import { Bike, Route, Heart, Sparkles } from "lucide-react";
+import {
+  Bike,
+  Route,
+  Heart,
+  Sparkles,
+  Wind,
+  Ruler,
+  DollarSign,
+  ShoppingBag,
+} from "lucide-react";
 
 export default function Home() {
-  const [visibleSections, setVisibleSections] = useState({});
+  type SectionKey = "sobre" | "patrocinadores";
+
+  const [visibleSections, setVisibleSections] = useState<
+    Record<SectionKey, boolean>
+  >({
+    sobre: false,
+    patrocinadores: false,
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,8 +77,8 @@ export default function Home() {
           </h1>
 
           <p className="mt-8 text-xl md:text-2xl max-w-3xl mx-auto text-gray-600 leading-relaxed animate-slideUp animation-delay-400">
-            Una experiencia que transforma cada pedaleada en un símbolo de fuerza
-            y determinación.
+            Una experiencia que transforma cada pedaleada en un símbolo de
+            fuerza y determinación.
           </p>
 
           <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6 animate-slideUp animation-delay-600">
@@ -187,6 +203,95 @@ export default function Home() {
       {/* Rodada */}
       <Rodada />
 
+      {/* ================= JERSEY OFICIAL ================= */}
+      <section className="py-32 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#9F1239] to-[#FFB6CD]"></div>
+
+        {/* Elementos decorativos */}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulseSlow"></div>
+        <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulseSlow animation-delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float"></div>
+
+        <div className="relative z-10 max-w-6xl mx-auto text-white">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
+              Jersey Oficial del Evento
+            </h2>
+            <p className="text-xl md:text-2xl opacity-90">
+              Edición conmemorativa exclusiva para esta rodada.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* IMAGEN DE LA JERSEY */}
+            <div className="relative">
+              <div className="absolute -inset-6 bg-white/10 blur-3xl rounded-3xl"></div>
+
+              <div className="relative bg-white/10 backdrop-blur-lg p-8 rounded-3xl shadow-2xl">
+                <img
+                  src="/images/jersey.jpeg"
+                  alt="Jersey oficial del evento"
+                  className="w-full object-contain rounded-2xl"
+                />
+              </div>
+            </div>
+
+            {/* INFORMACIÓN */}
+            <div className="space-y-8">
+              <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl shadow-2xl">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <Sparkles size={24} />
+                  Detalles
+                </h3>
+
+                <ul className="space-y-4 opacity-90">
+                  <li className="flex items-center gap-3">
+                    <Sparkles size={18} />
+                    Edición especial conmemorativa
+                  </li>
+
+                  <li className="flex items-center gap-3">
+                    <Wind size={18} />
+                    Tela deportiva transpirable
+                  </li>
+
+                  <li className="flex items-center gap-3">
+                    <Bike size={18} />
+                    Corte cómodo para rodada
+                  </li>
+
+                  <li className="flex items-center gap-3">
+                    <Ruler size={18} />
+                    Disponible en varias tallas
+                  </li>
+                </ul>
+
+                <div className="mt-10 flex items-center gap-4">
+                  <DollarSign size={28} />
+                  <div>
+                    <p className="text-lg opacity-80">Costo</p>
+                    <p className="text-5xl font-bold">$280 MXN</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl shadow-2xl">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                  <ShoppingBag size={24} />
+                  ¿Cómo puedes obtenerla?
+                </h3>
+
+                <p className="mt-6 text-sm opacity-80 leading-relaxed">
+                  Cómprala el día del evento. Habrá un stand exclusivo para la
+                  venta de jerseys y el pago será en efectivo. ¡No te quedes sin
+                  la tuya!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PATROCINADORES CON CARRUSEL */}
       <section
         id="patrocinadores"
@@ -212,52 +317,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* CTA FINAL */}
-      <section className="py-32 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#9F1239] to-[#FFB6CD]"></div>
-
-        {/* Círculos animados con CSS */}
-        <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulseSlow"></div>
-        <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulseSlow animation-delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float"></div>
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 animate-slideUp">
-            ¿Lista para ser parte del cambio?
-          </h2>
-          <p className="text-xl md:text-2xl mb-12 opacity-90 animate-slideUp animation-delay-200">
-            Únete a cientos de mujeres que están transformando su futuro
-          </p>
-
-          <a
-            href="/registro"
-            className="inline-block px-12 py-5 bg-white text-[#9F1239] rounded-full font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 group animate-slideUp animation-delay-400"
-          >
-            ¡Regístrate gratis ahora!
-            <span className="inline-block ml-3 group-hover:translate-x-2 transition-transform">
-              ✨
-            </span>
-          </a>
-
-          {/* Contador de asistentes */}
-          <div className="mt-12 flex justify-center gap-8 animate-fadeIn animation-delay-600">
-            <div>
-              <div className="text-3xl font-bold">500+</div>
-              <div className="text-sm opacity-80">Asistentes</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold">15+</div>
-              <div className="text-sm opacity-80">Ponentes</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold">20+</div>
-              <div className="text-sm opacity-80">Talleres</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </main>
   );

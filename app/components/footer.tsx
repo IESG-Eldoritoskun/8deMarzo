@@ -16,9 +16,6 @@ import {
 export default function Footer() {
   const socialLinks = [
     { icon: Facebook, href: "https://www.facebook.com/share/1JJBstL9vw/" },
-    { icon: Instagram, href: "https://instagram.com/tupagina" },
-    { icon: Twitter, href: "https://twitter.com/tupagina" },
-    { icon: Linkedin, href: "https://linkedin.com/company/tupagina" },
   ];
 
   return (
@@ -135,7 +132,7 @@ export default function Footer() {
               <li className="flex items-center space-x-3">
                 <Clock className="text-[#FFB6CD]" size={18} strokeWidth={1.8} />
                 <span className="text-gray-300 text-sm">
-                  8:00 AM - Domingo 8 de marzo
+                  7:30 AM - Domingo 8 de marzo
                 </span>
                 
               </li>
@@ -161,7 +158,6 @@ export default function Footer() {
       href="/login"
       className="border border-[#FFB6CD] text-[#FFB6CD] px-6 py-3 rounded-full font-semibold text-center hover:bg-[#FFB6CD] hover:text-[#0F172A] transition-all duration-300 flex items-center justify-center space-x-2"
     >
-      <span>🔐</span>
       <span>Iniciar sesión Admin</span>
     </Link>
   </div>

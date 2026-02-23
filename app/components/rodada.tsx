@@ -4,7 +4,7 @@ import { MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Rodada() {
-  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function Rodada() {
                 </div>
 
                 <div
-                  onClick={() => setOpen(true)}
+                  onClick={() => setSelectedImage("/information/rutaCorta.jpeg")}
                   className="relative rounded-3xl overflow-hidden shadow-xl border cursor-pointer group transition-transform duration-500 hover:scale-[1.02]"
                   style={{ borderColor: "var(--color-secondary)" }}
                 >
@@ -175,7 +175,7 @@ export default function Rodada() {
                 </div>
 
                 <div
-                  onClick={() => setOpen(true)}
+                  onClick={() => setSelectedImage("/information/ruta.jpeg")}
                   className="relative rounded-3xl overflow-hidden shadow-xl border cursor-pointer group transition-transform duration-500 hover:scale-[1.02]"
                   style={{ borderColor: "var(--color-secondary)" }}
                 >
@@ -324,24 +324,24 @@ export default function Rodada() {
       </section>
 
       {/* Modal */}
-      {open && (
+      {selectedImage && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-6"
-          onClick={() => setOpen(false)}
+          onClick={() => setSelectedImage(null)}
         >
           <div
             className="relative max-w-5xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setOpen(false)}
+              onClick={() => setSelectedImage(null)}
               className="absolute -top-12 right-0 text-white text-3xl"
             >
               ✕
             </button>
 
             <img
-              src="/information/ruta.jpeg"
+              src={selectedImage}
               alt="Mapa ampliado"
               className="w-full rounded-2xl shadow-2xl"
             />

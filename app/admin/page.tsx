@@ -5,12 +5,13 @@ import { supabase } from "@/app/lib/supabase";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-// Tipos actualizados (sin campos de jerseys)
+// Tipos actualizados (con campo grupo)
 type Registro = {
   id: string;
   nombre: string | null;
   lugar_procedencia: string | null;
   edad: number | null;
+  grupo: string | null; // NUEVO CAMPO
   comprobante_url: string | null;
   created_at: string | null;
   integrantes?: Integrante[];
@@ -33,6 +34,7 @@ export default function AdminPage() {
     totalRegistros: 0,
     totalIntegrantes: 0,
   });
+  const [grupos, setGrupos] = useState<{ [key: string]: number }>({}); // Para contar grupos
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -123,6 +125,16 @@ export default function AdminPage() {
         totalRegistros: dataCompleta.length,
         totalIntegrantes,
       });
+
+      // Calcular grupos
+      const conteoGrupos: { [key: string]: number } = {};
+      dataCompleta.forEach(registro => {
+        if (registro.grupo) {
+          const grupo = registro.grupo;
+          conteoGrupos[grupo] = (conteoGrupos[grupo] || 0) + 1;
+        }
+      });
+      setGrupos(conteoGrupos);
 
       setLoadingMessage(""); // Limpiar mensaje cuando termina
 
@@ -237,7 +249,7 @@ export default function AdminPage() {
       </div>
 
       {/* Tarjetas de estadísticas principales */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div className="bg-blue-50 p-6 rounded-lg shadow border border-blue-100">
           <h3 className="text-sm font-semibold text-blue-700 uppercase tracking-wide">
             Total Registros
@@ -253,7 +265,37 @@ export default function AdminPage() {
           <p className="text-4xl font-bold text-green-900">{stats.totalIntegrantes}</p>
           <p className="text-sm text-green-600 mt-1">Acompañantes registrados</p>
         </div>
+
+        {/* NUEVA TARJETA: Grupos */}
+        <div className="bg-purple-50 p-6 rounded-lg shadow border border-purple-100">
+          <h3 className="text-sm font-semibold text-purple-700 uppercase tracking-wide">
+            Grupos Registrados
+          </h3>
+          <p className="text-4xl font-bold text-purple-900">{Object.keys(grupos).length}</p>
+          <p className="text-sm text-purple-600 mt-1">Cantidad de grupos diferentes</p>
+        </div>
       </div>
+
+      {/* Lista de grupos (nuevo recuadro) */}
+      {Object.keys(grupos).length > 0 && (
+        <div className="bg-purple-50 p-6 rounded-lg shadow border border-purple-100 mb-8">
+          <h3 className="text-sm font-semibold text-purple-700 uppercase tracking-wide mb-4">
+            Grupos y cantidad de integrantes
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {Object.entries(grupos)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([grupo, cantidad]) => (
+                <div key={grupo} className="bg-white p-3 rounded-lg text-center shadow-sm">
+                  <span className="text-lg font-bold text-purple-900">{grupo}</span>
+                  <p className="text-2xl font-semibold text-purple-700">{cantidad}</p>
+                  <p className="text-xs text-gray-500">miembro{cantidad !== 1 ? 's' : ''}</p>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
 
       {/* Lista de registros */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -278,7 +320,7 @@ export default function AdminPage() {
                   onClick={() => toggleExpand(registro.id)}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div>
                         <p className="text-xs text-gray-500 uppercase">Nombre</p>
                         <p className="font-medium">{registro.nombre || "No especificado"}</p>
@@ -290,6 +332,11 @@ export default function AdminPage() {
                       <div>
                         <p className="text-xs text-gray-500 uppercase">Edad</p>
                         <p className="font-medium">{registro.edad ? `${registro.edad} años` : "No especificada"}</p>
+                      </div>
+                      {/* NUEVO CAMPO: Grupo */}
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase">Grupo</p>
+                        <p className="font-medium">{registro.grupo || "Sin grupo"}</p>
                       </div>
                     </div>
                     
@@ -380,6 +427,9 @@ export default function AdminPage() {
           <p className="text-sm text-yellow-700">
             <strong>{stats.totalRegistros}</strong> personas registradas con <strong>{stats.totalIntegrantes}</strong> integrantes.
             Promedio de {(stats.totalIntegrantes / stats.totalRegistros).toFixed(1)} integrantes por registro.
+            {Object.keys(grupos).length > 0 && (
+              <> <strong>{Object.keys(grupos).length}</strong> grupos diferentes.</>
+            )}
           </p>
         </div>
       )}

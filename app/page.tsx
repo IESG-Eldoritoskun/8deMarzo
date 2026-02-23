@@ -385,7 +385,7 @@ export default function Home() {
 
           {/* GALERÍA */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {["rodada1.jpg", "rodada2.jpg", "rodada3.jpg", "rodada4.jpg"].map(
+            {["rodada1.jpeg", "rodada2.jpeg", "rodada3.jpeg", "rodada4.jpeg", "rodada5.jpeg", "rodada6.jpeg", "rodada7.jpeg", "rodada8.jpeg"].map(
               (img, index) => (
                 <div
                   key={index}

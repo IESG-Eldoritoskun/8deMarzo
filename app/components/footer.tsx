@@ -96,18 +96,6 @@ export default function Footer() {
               Contacto
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
-                <MapPin
-                  className="text-[#C084FC] mt-1"
-                  size={18}
-                  strokeWidth={1.8}
-                />
-                <span className="text-gray-300 text-sm">
-                  Centro Cultural Maravatío
-                  <br />
-                  Maravatío, Michoacán
-                </span>
-              </li>
 
               <li className="flex items-center space-x-3">
                 <Mail className="text-[#C084FC]" size={18} strokeWidth={1.8} />

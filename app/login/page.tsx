@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/lib/supabase";
+import { Mail, Lock } from "lucide-react";
 
 export default function LoginAdmin() {
   const [email, setEmail] = useState("");
@@ -12,12 +13,9 @@ export default function LoginAdmin() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     setLoading(true);
-    
+
     try {
-      console.log("1. Intentando login...");
-      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -26,86 +24,91 @@ export default function LoginAdmin() {
       if (error) throw error;
 
       if (data?.user) {
-        console.log("2. Login exitoso, verificando sesión...");
-        
-        // Verificar sesión múltiples veces
         let attempts = 0;
-        const maxAttempts = 15; // Aumentamos intentos
-        
+        const maxAttempts = 15;
+
         while (attempts < maxAttempts) {
           const { data: { session } } = await supabase.auth.getSession();
-          
-          console.log(`Intento ${attempts + 1}:`, session ? "Sesión OK" : "Sin sesión");
-          
+
           if (session) {
-            console.log("3. Sesión confirmada!");
-            
-            // MÉTODO 1: router.push
-            console.log("4a. Intentando router.push...");
             router.push("/admin");
-            
-            // MÉTODO 2: window.location (después de un pequeño delay)
             setTimeout(() => {
-              console.log("4b. Intentando window.location...");
               window.location.href = "/admin";
-            }, 500);
-            
-            // MÉTODO 3: hard reload como último recurso
-            setTimeout(() => {
-              console.log("4c. Intentando hard reload...");
-              window.location.reload();
-            }, 1000);
-            
+            }, 400);
             return;
           }
-          
+
           await new Promise(resolve => setTimeout(resolve, 200));
           attempts++;
         }
-        
+
         throw new Error("No se pudo establecer la sesión");
       }
-      
     } catch (error: any) {
-      console.error("Error:", error);
       alert(error.message || "Error al iniciar sesión");
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6 text-center">Login Administrador</h1>
-        
-        <div className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full border p-2 rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          
-          <input
-            type="password"
-            placeholder="Contraseña"
-            className="w-full border p-2 rounded"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#FAF5FF] via-[#EDE9FE] to-[#DDD6FE] px-4">
+
+      {/* Card */}
+      <div className="bg-white/80 backdrop-blur-lg shadow-2xl border border-purple-200 rounded-3xl p-10 w-full max-w-md animate-fadeIn">
+
+        {/* Logo / Título */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-[#6D28D9]">
+            Panel Administrativo
+          </h1>
+          <p className="text-sm text-gray-500 mt-2">
+            Acceso exclusivo para organizadoras
+          </p>
+        </div>
+
+        <form onSubmit={handleLogin} className="space-y-6">
+
+          {/* Email */}
+          <div className="relative">
+            <Mail className="absolute left-3 top-3 text-purple-400" size={18} />
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-[#C084FC] focus:border-transparent transition"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* Password */}
+          <div className="relative">
+            <Lock className="absolute left-3 top-3 text-purple-400" size={18} />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-[#C084FC] focus:border-transparent transition"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* Botón */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+            className="w-full py-3 rounded-xl bg-[#6D28D9] text-white font-semibold hover:bg-[#5B21B6] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
           >
-            {loading ? "Ingresando..." : "Ingresar"}
+            {loading ? "Ingresando..." : "Ingresar al Panel"}
           </button>
+        </form>
+
+        {/* Footer */}
+        <div className="mt-6 text-center text-xs text-gray-400">
+          Mujeres en Bici 2026 ©
         </div>
-      </form>
+      </div>
     </div>
   );
 }

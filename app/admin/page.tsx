@@ -5,16 +5,12 @@ import { supabase } from "@/app/lib/supabase";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-// Tipos basados en tu estructura REAL
+// Tipos actualizados (sin campos de jerseys)
 type Registro = {
   id: string;
   nombre: string | null;
   lugar_procedencia: string | null;
   edad: number | null;
-  jersey_principal: string | null;
-  talla_principal: string | null;
-  total_jerseys: number | null;
-  total_pagar: number | null;
   comprobante_url: string | null;
   created_at: string | null;
   integrantes?: Integrante[];
@@ -25,12 +21,6 @@ type Integrante = {
   registro_id: string;
   nombre: string | null;
   edad: number | null;
-  jersey: string | null;
-  talla: string | null;
-};
-
-type TallasCount = {
-  [key: string]: number;
 };
 
 export default function AdminPage() {
@@ -43,7 +33,6 @@ export default function AdminPage() {
     totalRegistros: 0,
     totalIntegrantes: 0,
   });
-  const [tallasCount, setTallasCount] = useState<TallasCount>({});
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -135,28 +124,6 @@ export default function AdminPage() {
         totalIntegrantes,
       });
 
-      // Calcular jerseys por tallas
-      const conteoTallas: TallasCount = {};
-      
-      // Contar jerseys principales de registros
-      dataCompleta.forEach(registro => {
-        if (registro.talla_principal) {
-          const talla = registro.talla_principal;
-          conteoTallas[talla] = (conteoTallas[talla] || 0) + 1;
-        }
-      });
-
-      // Contar jerseys de integrantes
-      dataCompleta.forEach(registro => {
-        registro.integrantes?.forEach((integrante: any) => {
-          if (integrante.talla) {
-            const talla = integrante.talla;
-            conteoTallas[talla] = (conteoTallas[talla] || 0) + 1;
-          }
-        });
-      });
-
-      setTallasCount(conteoTallas);
       setLoadingMessage(""); // Limpiar mensaje cuando termina
 
     } catch (error: any) {
@@ -288,38 +255,7 @@ export default function AdminPage() {
         </div>
       </div>
 
-      {/* Tarjeta de Jerseys por Tallas */}
-      <div className="bg-purple-50 p-6 rounded-lg shadow border border-purple-100 mb-8">
-        <h3 className="text-sm font-semibold text-purple-700 uppercase tracking-wide mb-4">
-          Cantidad de Jerseys por Tallas
-        </h3>
-        
-        {Object.keys(tallasCount).length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {Object.entries(tallasCount)
-              .sort(([tallaA], [tallaB]) => {
-                const orden = { 'XS': 1, 'S': 2, 'M': 3, 'L': 4, 'XL': 5, 'XXL': 6, 'XXXL': 7 };
-                return (orden[tallaA as keyof typeof orden] || 99) - (orden[tallaB as keyof typeof orden] || 99);
-              })
-              .map(([talla, cantidad]) => (
-                <div key={talla} className="bg-white p-3 rounded-lg text-center shadow-sm">
-                  <span className="text-lg font-bold text-purple-900">{talla}</span>
-                  <p className="text-2xl font-semibold text-purple-700">{cantidad}</p>
-                </div>
-              ))}
-          </div>
-        ) : (
-          <p className="text-gray-500 text-center py-4">No hay jerseys registrados</p>
-        )}
-        
-        <div className="mt-4 pt-3 border-t border-purple-200">
-          <p className="text-sm text-purple-600 font-medium">
-            Total de jerseys: {Object.values(tallasCount).reduce((a, b) => a + b, 0)}
-          </p>
-        </div>
-      </div>
-
-      {/* Lista de registros (resto del código igual) */}
+      {/* Lista de registros */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <div className="px-6 py-4 border-b bg-gray-50">
           <h2 className="text-xl font-semibold text-gray-800">Registros Detallados</h2>
@@ -355,18 +291,6 @@ export default function AdminPage() {
                         <p className="text-xs text-gray-500 uppercase">Edad</p>
                         <p className="font-medium">{registro.edad ? `${registro.edad} años` : "No especificada"}</p>
                       </div>
-                      <div>
-                        <p className="text-xs text-gray-500 uppercase">Jersey Principal</p>
-                        <p className="font-medium">{registro.jersey_principal || "No especificado"}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 uppercase">Talla Principal</p>
-                        <p className="font-medium">{registro.talla_principal || "No especificada"}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 uppercase">Total Jerseys</p>
-                        <p className="font-medium">{registro.total_jerseys || 0}</p>
-                      </div>
                     </div>
                     
                     <div className="flex items-center gap-4 ml-4">
@@ -391,7 +315,20 @@ export default function AdminPage() {
                     </div>
                   </div>
 
-                  
+                  {/* Mostrar comprobante si existe */}
+                  {registro.comprobante_url && (
+                    <div className="mt-2">
+                      <a 
+                        href={registro.comprobante_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline text-sm"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Ver comprobante
+                      </a>
+                    </div>
+                  )}
                 </div>
 
                 {/* Integrantes (expandible) */}
@@ -409,7 +346,7 @@ export default function AdminPage() {
                         <div className="space-y-2">
                           {registro.integrantes.map((integrante) => (
                             <div key={integrante.id} className="bg-white p-3 rounded-lg shadow-sm border border-gray-200">
-                              <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
                                   <p className="text-xs text-gray-500">Nombre</p>
                                   <p className="font-medium">{integrante.nombre || "No especificado"}</p>
@@ -417,14 +354,6 @@ export default function AdminPage() {
                                 <div>
                                   <p className="text-xs text-gray-500">Edad</p>
                                   <p className="font-medium">{integrante.edad ? `${integrante.edad} años` : "No especificada"}</p>
-                                </div>
-                                <div>
-                                  <p className="text-xs text-gray-500">Jersey</p>
-                                  <p className="font-medium">{integrante.jersey || "No especificado"}</p>
-                                </div>
-                                <div>
-                                  <p className="text-xs text-gray-500">Talla</p>
-                                  <p className="font-medium">{integrante.talla || "No especificada"}</p>
                                 </div>
                               </div>
                             </div>

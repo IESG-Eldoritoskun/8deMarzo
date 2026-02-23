@@ -369,7 +369,7 @@ export default function Home() {
           </h2>
 
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
-            A todas las ciclistas que han pedaleado en ediciones anteriores,
+            A todas las y los ciclistas que han pedaleado en ediciones anteriores,
             organizadoras, patrocinadoras, voluntarias y personas que apoyan y
             comparten esta causa: gracias por ser parte de la historia de las
             Rodadas 8M.

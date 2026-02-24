@@ -234,7 +234,7 @@ export default function Home() {
 
       <p>
         Cada participante es responsable de su integridad física y de cualquier
-        daño ocurrido a su bicicleta durante la actividad, Es obligatorio el uso
+        daño ocurrido a su bicicleta durante la actividad. Es obligatorio el uso
         de casco y guantes, así como del cumplimiento de los reglamentos vigentes.
       </p>
 

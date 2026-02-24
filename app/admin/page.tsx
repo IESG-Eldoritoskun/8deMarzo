@@ -11,6 +11,7 @@ type Registro = {
   lugar_procedencia: string | null;
   edad: number | null;
   grupo: string | null;
+  telefono: string | null; // 📞 NUEVO CAMPO
   comprobante_url: string | null;
   created_at: string | null;
   integrantes?: Integrante[];
@@ -98,14 +99,13 @@ export default function AdminPage() {
     });
     setGrupos(conteoGrupos);
 
-    setPaginaActual(1); // Reset a página 1 al actualizar
+    setPaginaActual(1);
   };
 
   const toggleExpand = (id: string) => {
     setExpandedRegistro(expandedRegistro === id ? null : id);
   };
 
-  // 🔹 PAGINACIÓN
   const totalPaginas = Math.ceil(registros.length / REGISTROS_POR_PAGINA);
 
   const registrosPaginados = useMemo(() => {
@@ -231,7 +231,8 @@ export default function AdminPage() {
               className="p-4 cursor-pointer"
               onClick={() => toggleExpand(registro.id)}
             >
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {/* Grid ajustado a 5 columnas para incluir teléfono */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                 <div>
                   <p className="text-xs text-gray-500 uppercase">Nombre</p>
                   <p className="font-medium text-[#1E1B4B]">
@@ -256,6 +257,13 @@ export default function AdminPage() {
                   <p className="text-xs text-gray-500 uppercase">Grupo</p>
                   <p className="font-medium text-[#1E1B4B]">
                     {registro.grupo || "Sin grupo"}
+                  </p>
+                </div>
+                {/* 📞 NUEVA COLUMNA: Teléfono */}
+                <div>
+                  <p className="text-xs text-gray-500 uppercase">Teléfono</p>
+                  <p className="font-medium text-[#1E1B4B]">
+                    {registro.telefono || "No especificado"}
                   </p>
                 </div>
               </div>

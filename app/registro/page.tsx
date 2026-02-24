@@ -23,9 +23,10 @@ export default function Registro() {
     procedencia: "",
     edad: "",
     grupo: "",
+    telefono: "",
   });
 
-  // Función para validar campos vacíos
+  // Función para validar campos vacíos (teléfono AHORA ES OBLIGATORIO)
   const validarCampos = (): { valido: boolean; mensajeError: string } => {
     // Validar campos principales
     if (!formData.nombre.trim()) {
@@ -46,6 +47,13 @@ export default function Registro() {
         mensajeError: "❌ Falta el campo: Edad"
       };
     }
+    // 📞 NUEVA VALIDACIÓN: Teléfono obligatorio
+    if (!formData.telefono.trim()) {
+      return {
+        valido: false,
+        mensajeError: "❌ Falta el campo: Teléfono"
+      };
+    }
 
     // Validar integrantes
     for (let i = 0; i < integrantes.length; i++) {
@@ -53,13 +61,13 @@ export default function Registro() {
       if (!int.nombre.trim()) {
         return {
           valido: false,
-          mensajeError: `❌ Falta el nombre del integrante #${i + 1}`
+          mensajeError: `❌ Falta el nombre del integrante ${i + 1}`
       };
       }
       if (!int.edad.trim()) {
         return {
           valido: false,
-          mensajeError: `❌ Falta la edad del integrante #${i + 1}`
+          mensajeError: `❌ Falta la edad del integrante ${i + 1}`
         };
       }
     }
@@ -112,7 +120,6 @@ export default function Registro() {
         mensaje: validacion.mensajeError
       });
       
-      // Ocultar la alerta de error después de 3 segundos
       setTimeout(() => {
         setAlertaError({ mostrar: false, mensaje: "" });
       }, 3000);
@@ -121,7 +128,7 @@ export default function Registro() {
     }
 
     try {
-      // 🔹 Insertar registro principal
+      // 🔹 Insertar registro principal (con teléfono obligatorio)
       const { data: registro, error: registroError } = await supabase
         .from("registros")
         .insert([
@@ -130,6 +137,7 @@ export default function Registro() {
             lugar_procedencia: formData.procedencia,
             edad: Number(formData.edad),
             grupo: formData.grupo || null,
+            telefono: formData.telefono, // 📞 AHORA SIEMPRE TIENE VALOR
           },
         ])
         .select()
@@ -169,9 +177,9 @@ export default function Registro() {
         procedencia: "",
         edad: "",
         grupo: "",
+        telefono: "",
       });
 
-      // Ocultar la alerta de éxito después de 2 segundos
       setTimeout(() => {
         setMostrarAlertaExito(false);
       }, 2000);
@@ -184,7 +192,7 @@ export default function Registro() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FAF5FF] to-[#EDE9FE] flex items-center justify-center p-6 relative">
-      {/* Alerta de éxito circular centrada */}
+      {/* Alertas (sin cambios) */}
       {mostrarAlertaExito && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white rounded-full w-48 h-48 flex flex-col items-center justify-center shadow-2xl animate-pop-in border-4 border-green-500">
@@ -200,7 +208,6 @@ export default function Registro() {
         </div>
       )}
 
-      {/* Alerta de error para campos faltantes */}
       {alertaError.mostrar && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-80 p-6 flex flex-col items-center justify-center shadow-2xl animate-slide-down border-l-4 border-red-500">
@@ -263,6 +270,17 @@ export default function Registro() {
             name="grupo"
             placeholder="Grupo (En caso de pertenecer a alguno)"
             value={formData.grupo}
+            onChange={handleChange}
+            className="w-full border border-purple-200 bg-white p-3 rounded-lg focus:ring-2 focus:ring-[#C084FC] focus:border-[#6D28D9] transition focus:border-transparent"
+          />
+
+          {/* 📞 NUEVO CAMPO: Teléfono - AHORA OBLIGATORIO */}
+          <input
+            type="tel"
+            name="telefono"
+            placeholder="Teléfono"
+            required // ← AGREGAMOS required
+            value={formData.telefono}
             onChange={handleChange}
             className="w-full border border-purple-200 bg-white p-3 rounded-lg focus:ring-2 focus:ring-[#C084FC] focus:border-[#6D28D9] transition focus:border-transparent"
           />

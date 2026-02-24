@@ -261,7 +261,7 @@ export default function Rodada() {
                 },
                 {
                   title: "Abastecimiento 2",
-                  desc: "Saucillo Segundo, Gto",
+                  desc: "Saucillo Segundo, Gto./SanFelipe, Michoacán",
                   url: "https://maps.app.goo.gl/VtHeGTQ9XJwDnoUz9",
                 },
                 {

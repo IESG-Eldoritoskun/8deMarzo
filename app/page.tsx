@@ -16,6 +16,8 @@ import {
   ShoppingBag,
   MessageCircle,
   Facebook,
+  AlertTriangle,
+  ChevronDown,
 } from "lucide-react";
 
 export default function Home() {
@@ -203,6 +205,61 @@ export default function Home() {
             })}
           </div>
         </div>
+        {/* AVISO IMPORTANTE */}
+<div className="mt-24 max-w-4xl mx-auto relative">
+
+  <div className="bg-gradient-to-br from-amber-50 to-yellow-100 border border-amber-300 rounded-3xl p-10 shadow-xl">
+
+    <div className="flex items-center gap-3 mb-6">
+      <div className="w-10 h-10 rounded-full bg-amber-400/20 flex items-center justify-center">
+        <AlertTriangle className="text-amber-600" size={22} strokeWidth={2} />
+      </div>
+      <h3 className="text-2xl font-bold text-amber-700">
+        Aviso para Participantes
+      </h3>
+    </div>
+
+    <div className="text-sm md:text-base text-amber-900 space-y-4 leading-relaxed">
+      <p>
+        La participación en esta rodada implica reconocer que el ciclismo
+        es una actividad física que conlleva riesgos inherentes.
+      </p>
+
+      <p>
+        Las personas
+        involucradas en la realización del evento no se hacen responsables
+        por accidentes, lesiones o daños que pudieran ocurrir antes,
+        durante o después de la rodada ciclista.
+      </p>
+
+      <p>
+        Cada participante es responsable de su integridad física y de cualquier
+        daño ocurrido a su bicicleta durante la actividad, Es obligatorio el uso
+        de casco y guantes, así como del cumplimiento de los reglamentos vigentes.
+      </p>
+
+      <p>
+        Se recomienda acudir con ánfora o botella reutilizable para mantenerse
+        hidratada(o) durante el recorrido, así como contribuir al cuidado del
+        entorno evitando dejar residuos y procurando conservar limpia la ruta
+        en todo momento.
+      </p>
+
+      <p>
+        Las personas menores de edad deberán asistir acompañadas por una persona
+        adulta responsable durante el desarrollo del evento.
+      </p>
+
+      
+
+      <p>
+        La participación en el evento autoriza el uso de nombre e imagen
+        con fines informativos y promocionales relacionados con la rodada.
+      </p>
+    </div>
+
+  </div>
+</div>
       </section>
 
       {/* Rodada */}
@@ -369,10 +426,10 @@ export default function Home() {
           </h2>
 
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
-            A todas las y los ciclistas que han pedaleado en ediciones anteriores,
-            organizadoras, patrocinadoras, voluntarias y personas que apoyan y
-            comparten esta causa: gracias por ser parte de la historia de las
-            Rodadas 8M.
+            A todas las y los ciclistas que han pedaleado en ediciones
+            anteriores, organizadoras, patrocinadoras, voluntarias y personas
+            que apoyan y comparten esta causa: gracias por ser parte de la
+            historia de las Rodadas 8M.
           </p>
 
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-16">
@@ -385,21 +442,28 @@ export default function Home() {
 
           {/* GALERÍA */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {["rodada1.jpeg", "rodada2.jpeg", "rodada3.jpeg", "rodada4.jpeg", "rodada5.jpeg", "rodada6.jpeg", "rodada7.jpeg", "rodada8.jpeg"].map(
-              (img, index) => (
-                <div
-                  key={index}
-                  className="relative overflow-hidden rounded-2xl shadow-lg group"
-                >
-                  <img
-                    src={`/rodadas/${img}`}
-                    alt={`Rodada 8M ${index + 1}`}
-                    className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition duration-500"></div>
-                </div>
-              ),
-            )}
+            {[
+              "rodada1.jpeg",
+              "rodada2.jpeg",
+              "rodada3.jpeg",
+              "rodada4.jpeg",
+              "rodada5.jpeg",
+              "rodada6.jpeg",
+              "rodada7.jpeg",
+              "rodada8.jpeg",
+            ].map((img, index) => (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-2xl shadow-lg group"
+              >
+                <img
+                  src={`/rodadas/${img}`}
+                  alt={`Rodada 8M ${index + 1}`}
+                  className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition duration-500"></div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

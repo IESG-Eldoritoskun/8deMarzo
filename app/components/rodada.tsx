@@ -94,12 +94,11 @@ export default function Rodada() {
             <div className="grid sm:grid-cols-2 gap-12">
               {[
                 { title: "Distancia", value: "20 km" },
-                
-                { title: "Hora de reunión", value: "7:30 AM" },
+                { title: "Fecha y hora de reunión", value: "Domingo 8 de marzo, 7:30 AM" },
                 { title: "Hora de salida", value: "8:00 AM" },
                 {
                   title: "Punto de salida",
-                  value: "Canchas del Chirimoyo",
+                  value: "Cancha de béisbol de El Chirimoyo. Maravatío, Michoacán",
                   url: "https://www.google.com/maps/dir/?api=1&destination=Cancha+del+Chirimoyo",
                 },
               ].map((item, i) => (
@@ -118,7 +117,7 @@ export default function Rodada() {
                     {item.title}
                   </h3>
                   <p
-                    className="text-3xl font-bold"
+                    className="text-2xl font-bold"
                     style={{ color: "var(--color-textDark)" }}
                   >
                     {item.value}
@@ -191,12 +190,12 @@ export default function Rodada() {
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { title: "Distancia", value: "30 km" },
-                { title: "Hora de reuión", value: "7:30 AM" },
+                { title: "Fecha y hora de reunión", value: "Domingo 8 de marzo, 7:30 AM" },
                 { title: "Hora de salida", value: "8:00 AM" },
                 {
                   title: "Punto de salida",
-                  value: "Cancha del Chirimoyo",
-                  url: "https://www.google.com/maps/dir/?api=1&destination=Cancha+del+Chirimoyo",
+                  value: "Cancha de béisbol de El Chirimoyo. Maravatío, Michoacán",
+                  url: "https://www.google.com/maps/dir/?api=1&destination=Cancha+de+béisbol+de+El+Chirimoyo.+Maravatío,+Michoacán",
                 },
               ].map((item, i) => (
                 <div
@@ -214,7 +213,7 @@ export default function Rodada() {
                     {item.title}
                   </h3>
                   <p
-                    className="text-3xl font-bold"
+                    className="text-2xl font-bold"
                     style={{ color: "var(--color-textDark)" }}
                   >
                     {item.value}
@@ -261,7 +260,7 @@ export default function Rodada() {
                 },
                 {
                   title: "Abastecimiento 2",
-                  desc: "Saucillo Segundo, Gto./SanFelipe, Michoacán",
+                  desc: "Saucillo Segundo, Gto./San Felipe, Michoacán",
                   url: "https://maps.app.goo.gl/VtHeGTQ9XJwDnoUz9",
                 },
                 {
